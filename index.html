@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>FILE FF AUTO HEADSHOT</title>
+    <style>
+        html, body { margin:0; height:100%; overflow:hidden; }
+        body {
+            background-color: black;
+            color: red;
+            font-family: 'Courier New', monospace;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+        h1 { font-size:50px; animation:blink 1s infinite; }
+        @keyframes blink { 50% { opacity:0; } }
+        .warning { font-size:20px; margin-top:20px; }
+        .close-btn {
+            margin-top:50px;
+            padding:15px 30px;
+            background-color:red;
+            color:white;
+            border:none;
+            cursor:pointer;
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Layar awal untuk memicu fullscreen -->
+    <div id="startScreen">
+        <h1>TEKAN INI UNTUK MELANJUTKAN</h1>
+        <button onclick="startPrank()" style="padding:20px 40px; font-size:20px;">INI FILE NYA</button>
+    </div>
+
+    <!-- Layar prank (tersembunyi dulu) -->
+    <div id="prankScreen" style="display:none;">
+        <h1>FILE ANDA TERENKRIPSI!</h1>
+        <p class="warning">Kirim 1 juta ke nomor ini: 0852-7818-8807 untuk membuka kembali ransomini </p>
+        <button class="close-btn" onclick="closePrank()">TUTUP UNTUK TF</button>
+    </div>
+
+    <script>
+        function startPrank() {
+            // Masuk fullscreen
+            document.documentElement.requestFullscreen().catch(()=>{});
+            // Sembunyikan layar awal, tampilkan layar prank
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('prankScreen').style.display = 'block';
+        }
+
+        function closePrank() {
+            if (confirm("Lu ga bakalan bisa keluar ajg ")) {
+                alert("Hahaha, becanda doang! 😂");
+                document.exitFullscreen();
+                window.location.href = "https://www.google.com";
+            }
+        }
+
+        // Mencegah klik kanan & tombol F11 keluar
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F11') e.preventDefault();
+        });
+    </script>
+</body>
+</html>
